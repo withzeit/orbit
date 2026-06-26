@@ -1,0 +1,11 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
+  config: path.join(__dirname, "config", "database.cjs"),
+  "models-path": path.join(__dirname, "models"),
+  "seeders-path": path.join(__dirname, "seeders"),
+  "migrations-path": path.join(__dirname, "migrations"),
+};

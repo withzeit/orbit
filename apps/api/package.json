@@ -1,0 +1,32 @@
+{
+  "name": "@orbit/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "echo 'no lint configured'",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "sequelize-cli db:migrate"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^10.1.0",
+    "@fastify/jwt": "^9.1.0",
+    "@orbit/shared": "workspace:*",
+    "dotenv": "^16.5.0",
+    "fastify": "^5.3.3",
+    "fastify-plugin": "^5.0.1",
+    "pg": "^8.16.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "sequelize-cli": "^6.6.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
