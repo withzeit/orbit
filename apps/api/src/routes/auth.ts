@@ -1,6 +1,7 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { loginSchema, registerSchema } from "@orbit/shared";
 import { authenticate } from "../lib/authenticate.js";
+import { createDefaultPersonalWorkspace } from "../lib/default-workspace.js";
 import { setAuthCookies, clearAuthCookies, tokenTtl } from "../lib/cookies.js";
 import { hashPassword, verifyPassword } from "../lib/password.js";
 import { sendError, sendValidationError } from "../lib/errors.js";
@@ -49,6 +50,7 @@ export async function authRoutes(fastify: FastifyInstance) {
       name,
     });
 
+    await createDefaultPersonalWorkspace(fastify.models, user.id);
 
     const { accessToken, refreshToken } = signTokens(fastify, user.id);
     setAuthCookies(reply, accessToken, refreshToken);

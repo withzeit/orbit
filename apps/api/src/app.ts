@@ -4,6 +4,8 @@ import sequelizePlugin from "./plugins/sequelize.js";
 import authPlugin from "./plugins/auth.js";
 import { healthRoutes } from "./routes/health.js";
 import { authRoutes } from "./routes/auth.js";
+import { workspaceRoutes } from "./routes/workspaces.js";
+import { projectRoutes } from "./routes/projects.js";
 
 export async function buildApp() {
   const app = Fastify({
@@ -16,6 +18,8 @@ export async function buildApp() {
 
   await app.register(healthRoutes, { prefix: "/api/v1" });
   await app.register(authRoutes, { prefix: "/api/v1/auth" });
+  await app.register(workspaceRoutes, { prefix: "/api/v1" });
+  await app.register(projectRoutes, { prefix: "/api/v1" });
 
   return app;
 }

@@ -1,5 +1,7 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { fetchMe } from "@/lib/auth";
+import { Sidebar } from "@/components/Sidebar";
+import { WorkspaceProvider } from "@/context/WorkspaceContext";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async ({ context }) => {
@@ -19,8 +21,13 @@ export const Route = createFileRoute("/_authenticated")({
 
 function AuthenticatedLayout() {
   return (
-    <main className="min-h-screen p-6">
-      <Outlet />
-    </main>
+    <WorkspaceProvider>
+      <div className="flex min-h-screen">
+        <Sidebar />
+        <main className="flex-1 overflow-auto p-6">
+          <Outlet />
+        </main>
+      </div>
+    </WorkspaceProvider>
   );
 }
