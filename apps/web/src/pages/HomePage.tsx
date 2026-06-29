@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { fetchHealth } from "@/lib/health";
 
@@ -47,9 +48,23 @@ export function HomePage() {
         </div>
 
         <p className="text-slate-600">
-          Your workspace for tasks, projects, and the different areas of your life. Phase 0 is
-          live — API and database connectivity check below.
+          Your workspace for tasks, projects, and the different areas of your life.
         </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            to="/login"
+            className="inline-flex rounded-lg bg-orbit-600 px-4 py-2 text-sm font-medium text-white hover:bg-orbit-700"
+          >
+            Sign in
+          </Link>
+          <Link
+            to="/register"
+            className="inline-flex rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          >
+            Create account
+          </Link>
+        </div>
 
         <div className="mt-8 rounded-xl border border-slate-100 bg-slate-50 p-6">
           <div className="flex items-center justify-between">
@@ -78,8 +93,8 @@ export function HomePage() {
 
           {health.isError && (
             <p className="mt-4 text-sm text-red-600">
-              Could not reach the API. Make sure the backend is running on port 3001 and Postgres is
-              up.
+              Could not reach the API. Make sure the backend is running (default port 4000) and
+              Postgres is up.
             </p>
           )}
         </div>

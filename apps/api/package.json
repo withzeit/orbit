@@ -9,13 +9,17 @@
     "start": "node dist/server.js",
     "lint": "echo 'no lint configured'",
     "typecheck": "tsc --noEmit",
-    "db:migrate": "sequelize-cli db:migrate"
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:seed": "sequelize-cli db:seed:all",
+    "dev:token": "tsx scripts/sign-dev-token.ts",
+    "dev:seed": "tsx scripts/dev-seed.ts"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^10.1.0",
     "@fastify/jwt": "^9.1.0",
     "@orbit/shared": "workspace:*",
+    "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "fastify": "^5.3.3",
     "fastify-plugin": "^5.0.1",
@@ -24,6 +28,7 @@
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^22.15.21",
     "sequelize-cli": "^6.6.3",
     "tsx": "^4.19.4",
