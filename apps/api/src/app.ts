@@ -6,6 +6,7 @@ import { healthRoutes } from "./routes/health.js";
 import { authRoutes } from "./routes/auth.js";
 import { workspaceRoutes } from "./routes/workspaces.js";
 import { projectRoutes } from "./routes/projects.js";
+import { taskRoutes } from "./routes/tasks.js";
 
 export async function buildApp() {
   const app = Fastify({
@@ -20,6 +21,7 @@ export async function buildApp() {
   await app.register(authRoutes, { prefix: "/api/v1/auth" });
   await app.register(workspaceRoutes, { prefix: "/api/v1" });
   await app.register(projectRoutes, { prefix: "/api/v1" });
+  await app.register(taskRoutes, { prefix: "/api/v1" });
 
   return app;
 }

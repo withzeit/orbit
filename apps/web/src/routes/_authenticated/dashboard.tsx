@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { TaskDigestWidget } from "@/components/tasks/TaskDigestWidget";
 import { useWorkspaceContext } from "@/context/WorkspaceContext";
+import { useUserTasks } from "@/hooks/useTasks";
 import { Route as AuthenticatedRoute } from "../_authenticated";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -9,6 +11,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 function DashboardPage() {
   const { user } = AuthenticatedRoute.useRouteContext();
   const { activeWorkspace, isLoading } = useWorkspaceContext();
+  const { data: tasks = [], isLoading: tasksLoading } = useUserTasks();
 
   return (
     <div className="space-y-6">
@@ -36,15 +39,24 @@ function DashboardPage() {
               {activeWorkspace.type} workspace · {activeWorkspace.slug}
             </p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-6">
-            <h3 className="text-sm font-semibold text-slate-900">Quick links</h3>
-            <Link
-              to="/workspaces/$workspaceId/projects"
-              params={{ workspaceId: activeWorkspace.id }}
-              className="mt-3 inline-flex rounded-lg bg-orbit-600 px-4 py-2 text-sm font-medium text-white hover:bg-orbit-700"
-            >
-              View projects
-            </Link>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-white p-6">
+              <h3 className="text-sm font-semibold text-slate-900">Quick links</h3>
+              <Link
+                to="/workspaces/$workspaceId/projects"
+                params={{ workspaceId: activeWorkspace.id }}
+                className="mt-3 inline-flex rounded-lg bg-orbit-600 px-4 py-2 text-sm font-medium text-white hover:bg-orbit-700"
+              >
+                View projects
+              </Link>
+            </div>
+            {tasksLoading ? (
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <p className="text-sm text-slate-500">Loading tasks…</p>
+              </div>
+            ) : (
+              <TaskDigestWidget tasks={tasks} />
+            )}
           </div>
         </div>
       )}

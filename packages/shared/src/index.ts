@@ -29,3 +29,16 @@ export {
   type CreateProjectInput,
   type UpdateProjectInput,
 } from "./project.js";
+export {
+  taskStatusSchema,
+  taskPrioritySchema,
+  taskSchema,
+  taskListSchema,
+  createTaskSchema,
+  updateTaskSchema,
+  type Task,
+  type TaskStatus,
+  type TaskPriority,
+  type CreateTaskInput,
+  type UpdateTaskInput,
+} from "./task.js";

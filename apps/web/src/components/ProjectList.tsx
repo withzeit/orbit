@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import type { Project } from "@orbit/shared";
 import { PROJECT_COLORS } from "@/lib/project-colors";
@@ -77,7 +78,13 @@ function ProjectRow({ project, workspaceId }: { project: Project; workspaceId: s
         </div>
       ) : (
         <>
-          <span className="flex-1 font-medium text-slate-900">{project.name}</span>
+          <Link
+            to="/workspaces/$workspaceId/projects/$projectId"
+            params={{ workspaceId, projectId: project.id }}
+            className="flex-1 font-medium text-slate-900 hover:text-orbit-600"
+          >
+            {project.name}
+          </Link>
           <button
             type="button"
             onClick={() => setIsEditing(true)}
